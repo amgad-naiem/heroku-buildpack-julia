@@ -20,7 +20,7 @@ cd ${BUILD_DIR}
 
 echo -n "-----> Installing julia ...."
 
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia0.3_0.3.11-trusty2_amd64.deb
+deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.4.2-trusty2_amd64.deb
 https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libsuitesparse-dev_4.2.0-juliadeps1~raring_amd64.deb
 http://cz.archive.ubuntu.com/ubuntu/pool/main/g/gcc-4.8/libgfortran3_4.8.2-19ubuntu1_amd64.deb"
 
