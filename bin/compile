@@ -56,13 +56,19 @@ fi
 
 # these are not presistent in heroku
 julia/usr/bin/julia -e "Pkg.update()"
-for julia_dep in $(<"REQUIRE"); do
+while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
   if [[ $julia_dep == git* ]]; then
     echo 'in clone'
     julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
   else
-    julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+    array=( $julia_dep )
+    if [[ ${#array[@]} > 1 ]]; then
+        julia -e "Pkg.add(\"${array[0]}\")"
+        julia -e "Pkg.pin(\"${array[0]}\",v\"${array[1]}\")"
+    else
+        julia -e "Pkg.add(\"$julia_dep\")"
+    fi
   fi
-done
+done < "REQUIRE"
 
 cp -r ~/.julia ${BUILD_DIR}/.julia
