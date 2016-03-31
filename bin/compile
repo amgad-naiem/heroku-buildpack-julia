@@ -18,42 +18,6 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd ${BUILD_DIR}
 
-echo -n "-----> Installing julia ...."
-
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.4.2-trusty2_amd64.deb
-https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libsuitesparse-dev_4.2.0-juliadeps1~raring_amd64.deb
-http://cz.archive.ubuntu.com/ubuntu/pool/main/g/gcc-4.8/libgfortran3_4.8.2-19ubuntu1_amd64.deb"
-
-for dep in $deps; do
-  depb=$(basename $dep)
-  echo "        - $depb"
-  curl -LO $dep
-  dpkg -x $depb ${BUILD_DIR}/julia
-done
-
-set-env PATH '$HOME/julia/usr/bin:$PATH'
-set-env LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH'
-set-env LD_LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
-
-export LD_LIBRARY_PATH=./julia/usr/lib:./julia/usr/lib/x86_64-linux-gnu
-LD_LIBRARY_PATH=./julia/usr/lib:./julia/usr/lib/x86_64-linux-gnu
-echo $LD_LIBRARY_PATH
-
-# dep="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
-# depb=$(basename $dep)
-# echo "        - $depb"
-# curl -LO $dep
-# tar -zxf $depb
-# cd julia
-# make
-
-echo " done"
-
-if [ "${PIPESTATUS[*]}" != "0" ]; then
-  echo " !     Failed to install ${JULIA_DIST}"
-  exit 1
-fi
-
 # these are not presistent in heroku
 julia/usr/bin/julia -e "Pkg.update()"
 while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
