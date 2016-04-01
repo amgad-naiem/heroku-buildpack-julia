@@ -18,6 +18,9 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd ${BUILD_DIR}
 
+set-env LD_LIBRARY_PATH="/app/.apt/usr/lib/libblas/:/app/.apt/usr/lib/lapack/:$LD_LIBRARY_PATH"
+set-env LIBRARY_PATH="/app/.apt/usr/lib/libblas/:/app/.apt/usr/lib/lapack/:$LIBRARY_PATH"
+
 # these are not presistent in heroku
 julia -e "Pkg.update()"
 while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
