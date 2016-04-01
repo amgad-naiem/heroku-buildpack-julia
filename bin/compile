@@ -19,11 +19,11 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 cd ${BUILD_DIR}
 
 # these are not presistent in heroku
-julia/usr/bin/julia -e "Pkg.update()"
+julia -e "Pkg.update()"
 while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
   if [[ $julia_dep == git* ]]; then
     echo 'in clone'
-    julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
+    julia -e "Pkg.clone(\"$julia_dep\")"
   else
     array=( $julia_dep )
     if [[ ${#array[@]} > 1 ]]; then
