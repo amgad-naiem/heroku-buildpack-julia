@@ -20,12 +20,12 @@ cd ${BUILD_DIR}
 
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_julia.sh
-export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/libblas:\$HOME/.apt/usr/lib/lapack:\$LD_LIBRARY_PATH"
-export LIBRARY_PATH="\$HOME/.apt/usr/lib/libblas:\$HOME/.apt/usr/lib/lapack:\$LIBRARY_PATH"
+export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/julia:\$HOME/.apt/usr/lib/libblas:\$HOME/.apt/usr/lib/lapack:\$LD_LIBRARY_PATH"
+export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/julia:\$HOME/.apt/usr/lib/libblas:\$HOME/.apt/usr/lib/lapack:\$LIBRARY_PATH"
 EOF
 
-export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/libblas/:$BUILD_DIR/.apt/usr/lib/lapack/:$LD_LIBRARY_PATH"
-export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/libblas/:$BUILD_DIR/.apt/usr/lib/lapack/:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/julia:$BUILD_DIR/.apt/usr/lib/libblas/:$BUILD_DIR/.apt/usr/lib/lapack/:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/julia:$BUILD_DIR/.apt/usr/lib/libblas/:$BUILD_DIR/.apt/usr/lib/lapack/:$LIBRARY_PATH"
 
 # these are not presistent in heroku
 julia -e "Pkg.update()"
